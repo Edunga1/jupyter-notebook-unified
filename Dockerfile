@@ -29,15 +29,14 @@ RUN wget -q https://nodejs.org/dist/v${NODE_VERSION}/${NODE_PACKAGE}.tar.xz \
     && rm -r ${NODE_PACKAGE} \
     && rm ${NODE_PACKAGE}.tar.xz
 
-# Install ijavascript as user jovyan
-USER jovyan
+# Switch back to jovyan to avoid accidental container runs as root
+# Install ijavascript
+USER $NB_UID
 ENV NODE_PATH /home/${NB_USER}/node_modules
 ENV PATH ${NODE_PATH}/.bin:${PATH}
 RUN npm install --prefix /home/$NB_USER ijavascript \
     && ijsinstall
 
-# Switch back to jovyan to avoid accidental container runs as root
-USER $NB_UID
 WORKDIR $HOME/work
 
 CMD ["start-notebook.sh", "--NotebookApp.token=''"]
