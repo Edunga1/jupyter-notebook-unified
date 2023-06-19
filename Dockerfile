@@ -13,19 +13,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /tmp/* /var/tmp/* \
     && rm -rf /var/lib/apt/lists/*
 
-# Install nodejs
-ENV NODE_VERSION 10.15.3
-ENV NODE_PACKAGE node-v$NODE_VERSION-linux-x64
-RUN mkdir -p $HOME/.node-gyp
-RUN wget -q https://nodejs.org/dist/v${NODE_VERSION}/${NODE_PACKAGE}.tar.xz \
-    && tar xf ${NODE_PACKAGE}.tar.xz \
-    && cp -R ${NODE_PACKAGE}/bin/* /usr/local/bin \
-    && cp -R ${NODE_PACKAGE}/include/* /usr/local/include \
-    && cp -R ${NODE_PACKAGE}/lib/* /usr/local/lib \
-    && cp -R ${NODE_PACKAGE}/share/* /usr/local/share \
-    && rm -r ${NODE_PACKAGE} \
-    && rm ${NODE_PACKAGE}.tar.xz
-
 # Switch back to jovyan to avoid accidental container runs as root
 # Install ijavascript
 USER $NB_UID
