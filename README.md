@@ -5,8 +5,8 @@ Image Base: [jupyter/minimal-notebook](https://hub.docker.com/r/jupyter/minimal-
 Usage:
 
 ```bash
-$ docker build -t jupyter-notebook-nodejs .
-$ docker run --rm --name jupyter -p 8888:8888 -v $(pwd):/home/jovyan/work jupyter-notebook-nodejs
+$ docker build -t jupyter-notebook .
+$ docker run --rm --name jupyter -p 8888:8888 -v $(pwd):/home/jovyan/work jupyter-notebook
 ```
 
 or
