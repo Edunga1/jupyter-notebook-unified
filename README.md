@@ -1,4 +1,4 @@
-# Jupyter Notebook Python 3, 2 + NodeJS
+# Jupyter Notebook Python 3 + NodeJS
 
 Image Base: [jupyter/minimal-notebook](https://hub.docker.com/r/jupyter/minimal-notebook)
 

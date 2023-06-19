@@ -1,19 +1,9 @@
 FROM jupyter/minimal-notebook:latest
 
-LABEL author="Maximilian Fellner <max.fellner@gmail.com>"
-LABEL maintainer="goonr21@gmail.com"
-
-# Add a Python 2.x environment.
-# Ref. https://jupyter-docker-stacks.readthedocs.io/en/latest/using/recipes.html#add-a-python-2-x-environment
-RUN conda create --quiet --yes -p $CONDA_DIR/envs/python2 python=2.7 ipython ipykernel kernda && \
-    conda clean -tipsy
 USER root
-RUN $CONDA_DIR/envs/python2/bin/python -m ipykernel install && \
-    $CONDA_DIR/envs/python2/bin/kernda -o -y /usr/local/share/jupyter/kernels/python2/kernel.json
 
 # Install ijavascript dependencies. See https://github.com/n-riesco/ijavascript
 ENV DEBIAN_FRONTEND noninteractive
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libssl-dev \
@@ -45,5 +35,4 @@ RUN npm install --prefix /home/$NB_USER ijavascript \
     && ijsinstall
 
 WORKDIR $HOME/work
-
 CMD ["start-notebook.sh", "--NotebookApp.token=''"]
